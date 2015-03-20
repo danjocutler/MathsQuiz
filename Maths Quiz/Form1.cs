@@ -21,16 +21,20 @@ namespace Maths_Quiz
         int minuend;
         int subtrahend;
 
+        int multiplicand;
+        int multiplier;
+
+        int dividend;
+        int divisor;
+
         int timeLeft;
 
         public void StartTheQuiz()
         {
             addend1 = randomiser.Next(51);
             addend2 = randomiser.Next(51);
-
             plusLeftLabel.Text = addend1.ToString();
             plusRightLabel.Text = addend2.ToString();
-
             sum.Value = 0;
 
             minuend = randomiser.Next(101);
@@ -38,6 +42,19 @@ namespace Maths_Quiz
             minusLeftLabel.Text = minuend.ToString();
             minusRightLabel.Text = subtrahend.ToString();
             difference.Value = 0;
+
+            multiplicand = randomiser.Next(2, 11);
+            multiplier = randomiser.Next(2, 11);
+            timesLeftLabel.Text = multiplicand.ToString();
+            timesRightLabel.Text = multiplier.ToString();
+            product.Value = 0;
+
+            divisor = randomiser.Next(2, 11);
+            int temporaryQuotient = randomiser.Next(2, 11);
+            dividend = divisor * temporaryQuotient;
+            dividedLeftLabel.Text = dividend.ToString();
+            dividedRightLabel.Text = divisor.ToString();
+            quotient.Value = 0;
 
             timeLeft = 30;
             timeLabel.Text = "30 seconds";
@@ -68,7 +85,9 @@ namespace Maths_Quiz
         private bool CheckTheAnswer()
         {
             if ((addend1 + addend2 == sum.Value)
-                && (minuend - subtrahend == difference.Value))
+                && (minuend - subtrahend == difference.Value)
+                && (multiplicand * multiplier == product.Value)
+                && (dividend / divisor == quotient.Value))
                 return true;
             else
                 return false;
@@ -95,6 +114,8 @@ namespace Maths_Quiz
                 MessageBox.Show("You didn't finish in time.", "Sorry!");
                 sum.Value = addend1 + addend2;
                 difference.Value = minuend - subtrahend;
+                product.Value = multiplicand * multiplier;
+                quotient.Value = dividend / divisor;
                 startButton.Enabled = true;
             }
         }
