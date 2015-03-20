@@ -18,6 +18,9 @@ namespace Maths_Quiz
         int addend1;
         int addend2;
 
+        int minuend;
+        int subtrahend;
+
         int timeLeft;
 
         public void StartTheQuiz()
@@ -29,6 +32,12 @@ namespace Maths_Quiz
             plusRightLabel.Text = addend2.ToString();
 
             sum.Value = 0;
+
+            minuend = randomiser.Next(101);
+            subtrahend = randomiser.Next(minuend);
+            minusLeftLabel.Text = minuend.ToString();
+            minusRightLabel.Text = subtrahend.ToString();
+            difference.Value = 0;
 
             timeLeft = 30;
             timeLabel.Text = "30 seconds";
@@ -58,7 +67,8 @@ namespace Maths_Quiz
 
         private bool CheckTheAnswer()
         {
-            if (addend1 + addend2 == sum.Value)
+            if ((addend1 + addend2 == sum.Value)
+                && (minuend - subtrahend == difference.Value))
                 return true;
             else
                 return false;
@@ -84,6 +94,7 @@ namespace Maths_Quiz
                 timeLabel.Text = "Time's up!";
                 MessageBox.Show("You didn't finish in time.", "Sorry!");
                 sum.Value = addend1 + addend2;
+                difference.Value = minuend - subtrahend;
                 startButton.Enabled = true;
             }
         }
