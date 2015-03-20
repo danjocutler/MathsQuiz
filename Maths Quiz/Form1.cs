@@ -66,11 +66,6 @@ namespace Maths_Quiz
             InitializeComponent();
         }
 
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void product_ValueChanged(object sender, EventArgs e)
         {
 
@@ -95,9 +90,15 @@ namespace Maths_Quiz
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            if (timeLeft <= 6)
+            {
+                timeLabel.BackColor = Color.Red;
+            }
+
             if (CheckTheAnswer())
             {
                 timer1.Stop();
+                timeLabel.BackColor = Color.WhiteSmoke;
                 MessageBox.Show("You got all the answers right!",
                                 "Congratulations!");
                 startButton.Enabled = true;
@@ -110,6 +111,7 @@ namespace Maths_Quiz
             else
             {
                 timer1.Stop();
+                timeLabel.BackColor = Color.WhiteSmoke;
                 timeLabel.Text = "Time's up!";
                 MessageBox.Show("You didn't finish in time.", "Sorry!");
                 sum.Value = addend1 + addend2;
